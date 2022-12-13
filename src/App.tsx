@@ -1,24 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { ErrorMessage } from "./components/ErrorMessage";
+import { Loader } from "./components/Loader";
+import { Modal } from "./components/Modal";
+import {Product} from "./components/Product";
+import { useProducts } from "./Hooks/products";
 
+// https://github.com/vladilenm/react-fast-2022
+// https://disk.yandex.ru/i/80S0RVQ6Yl6yCA
+    // https://www.youtube.com/watch?v=OJ16BaPC6VI
 function App() {
+  const {products, error, loading } = useProducts();
+ 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container mx-auto max-w-7xl pt-5 grid grid-cols-3 gap-4 px-14">
+      { loading && <Loader /> }
+      { error   && <ErrorMessage error={error} /> }
+      {products.map(product => <Product key={product.id} product={product}/>)}
+      <Modal/>
     </div>
   );
 }
