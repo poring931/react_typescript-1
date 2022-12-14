@@ -1,9 +1,10 @@
-import axios, { AxiosError } from 'axios';
-import React, { useEffect, useState } from 'react';
-import { IProduct } from '../models';
 
-export function useProducts () {
-    const [products, setProducts] = useState<IProduct[]>([])
+import {useEffect, useState} from 'react'
+import {IProduct} from '../models'
+import axios, {AxiosError} from 'axios'
+
+export function useProducts() {
+  const [products, setProducts] = useState<IProduct[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
@@ -28,5 +29,6 @@ export function useProducts () {
   useEffect(() => {
     fetchProducts()
   }, [])
-  return { products, error, loading }
+
+  return { products, error, loading, addProduct }
 }
